@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+  <style>
+    body {
+      text-align: center;
+    }
+    img {
+      max-height: 300px;
+      width: auto;
+    }
+    #imageDiv {
+      height: 300px;
+    }
+    #predictions {
+      border-style: solid;
+      width: auto;
+      height: 200px;
+    }
+  </style>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
-    <input type="file" id="input" onchange="predict(image)" />
+    <div id="imageDiv">
+      <img id="image" />
+    </div>
+    <input type="file" id="input" onchange="loadImage(this)" /><br />
+    <div id="predictions"></div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.2/dist/tf.min.js"></script>
     <script src="main.js"></script>
   </body>
