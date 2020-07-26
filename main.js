@@ -1,5 +1,6 @@
 const inputButton = document.getElementById('input');
 const imageFrame = document.getElementById('image');
+const imageDiv = document.getElementById('imageDiv');
 const predictionFrame = document.getElementById('predictions');
 let model, image;
 let suggestedSpecies = [];
@@ -7,12 +8,10 @@ let suggestedSpecies = [];
 async function loadModels() {
   const MODEL_URL =
     'https://raw.githubusercontent.com/leoffx/tori-birds-identification/master/src/assets/tf/model.json';
-  console.log('Model loading.');
   model = await tf.loadGraphModel(MODEL_URL);
-  console.log('Model loaded.');
 }
 
-function loadImage(input) {
+async function loadImage(input) {
   var reader = new FileReader();
   reader.readAsDataURL(input.files[0]);
   reader.onload = function (e) {
@@ -55,6 +54,9 @@ imageFrame.onload = function (e) {
 };
 
 async function predict() {
+  while (!model) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
   image = tf.browser
     .fromPixels(imageFrame)
     .resizeBilinear([224, 224])
