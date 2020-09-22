@@ -1,28 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <style>
-    body {
-      text-align: center;
-    }
-    img {
-      max-height: 300px;
-      width: auto;
-    }
-    #imageDiv {
-      height: 300px;
-    }
-    #predictions {
-      width: auto;
-      height: 200px;
-    }
-    #input {
-      margin: auto;
-    }
-    #imageDiv {
-      height: 380px;
-    }
-  </style>
   <head>
+    <link rel="stylesheet" href="styles.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Harpia</title>
@@ -41,7 +20,9 @@
       </div>
       <input type="file" id="input" onchange="loadImage(this)" />
       <br />
-      <div id="predictions" class="jumbotron"></div>
+      <div id="predictions" class="jumbotron">
+        Loading model, please wait...
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.2/dist/tf.min.js"></script>
     <script src="main.js"></script>

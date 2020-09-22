@@ -9,6 +9,8 @@ async function loadModels() {
   const MODEL_URL =
     'https://raw.githubusercontent.com/leoffx/tori-birds-identification/master/src/assets/tf/model.json';
   model = await tf.loadGraphModel(MODEL_URL);
+  predictionFrame.innerText =
+    'Model loaded! Please upload a brazilian bird picture.';
 }
 
 async function loadImage(input) {
@@ -36,15 +38,35 @@ imageFrame.onload = function (e) {
         sex: bird.sex,
       };
       if (suggestionData.confidence > 10) {
+        birdName =
+          suggestionData.name.charAt(0).toUpperCase() +
+          suggestionData.name.slice(1);
+        switch (suggestionData.sex) {
+          case 'F':
+            birdSex = 'Female';
+            break;
+          case 'M':
+            birdSex = 'Male';
+            break;
+          default:
+            birdSex = '';
+        }
+        switch (suggestionData.age) {
+          case 'A':
+            birdAge = 'Adult';
+            break;
+          case 'J':
+            birdAge = 'Young';
+            break;
+          default:
+            birdAge = '';
+        }
+
         suggestedSpecies.push(suggestionData);
         var item = document.createElement('li');
         item.appendChild(
           document.createTextNode(
-            `${suggestionData.name} ${
-              suggestionData.sex ? suggestionData.sex : ''
-            } ${suggestionData.age ? suggestionData.age : ''} : ${
-              suggestionData.confidence
-            }%`
+            `${birdName}, ${birdAge} ${birdSex} : ${suggestionData.confidence}%`
           )
         );
         predictionFrame.appendChild(item);
