@@ -3,6 +3,7 @@ body {
 }
 img {
   max-height: 300px;
+  max-width: 100%;
   width: auto;
 }
 #imageDiv {
